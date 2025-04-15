@@ -36,3 +36,7 @@ lapack/reference
 .settings
 Makefile
 !ci/build.gitlab-ci.yml
+
+cmake-build-*
+.idea
+.vscode

@@ -651,3 +651,12 @@ add_custom_target ( uninstall
 if (EIGEN_SPLIT_TESTSUITE)
   ei_split_testsuite("${EIGEN_SPLIT_TESTSUITE}")
 endif()
+
+if (CMAKE_BUILD_TYPE MATCHES Debug AND CMAKE_COMPILER_IS_GNUCXX)
+  include(CodeCoverage)
+  set(CODE_COVERAGE_VERBOSE ON)
+  append_coverage_compiler_flags()
+  set(COVERAGE_EXCLUDES "*build*" "failtest" "lapack" "test" "unsupported")
+  setup_target_for_coverage_gcovr_xml(NAME coverage-xml DEPENDENCIES check)
+  setup_target_for_coverage_gcovr_html(NAME coverage-html DEPENDENCIES check)
+endif ()
